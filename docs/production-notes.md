@@ -1,0 +1,11 @@
+# Production
+- Separate API and workers into independent containers/deployments.
+- Use managed MongoDB/Redis, TLS and private networking.
+- Store secrets in Secret Manager/KMS, not .env.
+- Add service authentication and strict tenant authorization.
+- Authenticate Pub/Sub push requests.
+- Add mailbox-aware pacing/quotas, not only worker concurrency.
+- Treat Gmail send timeouts as ambiguous and reconcile before retrying.
+- Handle Gmail history expiration with full mailbox reconciliation.
+- Add metrics, tracing, alerts and dead-letter handling.
+- Review Gmail OAuth scopes and Google's verification/security requirements before external customer onboarding.

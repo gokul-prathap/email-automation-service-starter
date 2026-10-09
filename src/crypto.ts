@@ -1,0 +1,3 @@
+import crypto from "node:crypto"; import {env} from "./config.js"; const key=Buffer.from(env.TOKEN_ENCRYPTION_KEY,"hex");
+export function encrypt(v:string){const iv=crypto.randomBytes(12),c=crypto.createCipheriv("aes-256-gcm",key,iv),e=Buffer.concat([c.update(v,"utf8"),c.final()]);return [iv,c.getAuthTag(),e].map(x=>x.toString("base64url")).join(".");}
+export function decrypt(v:string){const [i,t,e]=v.split(".");if(!i||!t||!e)throw Error("Invalid encrypted value");const d=crypto.createDecipheriv("aes-256-gcm",key,Buffer.from(i,"base64url"));d.setAuthTag(Buffer.from(t,"base64url"));return Buffer.concat([d.update(Buffer.from(e,"base64url")),d.final()]).toString();}

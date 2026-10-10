@@ -47,3 +47,7 @@ PowerShell:
 `Invoke-RestMethod -Method Post -Uri http://localhost:3001/campaigns -ContentType "application/json" -Body $b`
 
 Pub/Sub push requires a public HTTPS endpoint; localhost cannot receive Google's push directly. Use a tunnel for local reply testing, then point a Pub/Sub push subscription to `/webhooks/google/pubsub`.
+
+## Delivery lifecycle, retries, pause/resume and tests
+
+See [delivery-reliability.md](delivery-reliability.md) for the atomic state model, mailbox coordination, UNKNOWN reconciliation, new settings, test coverage and exact PowerShell verification commands. Preserve your existing `.env` when upgrading. Stop all old API/worker instances before running the updated worker.
